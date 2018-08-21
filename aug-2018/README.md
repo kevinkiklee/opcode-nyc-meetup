@@ -4,7 +4,8 @@
 
 ### No coding
 
-*[Sum of an array]*
+**[Sum of an array]**
+
 Given an array, return the sum of all the elements.
 
 Examples:
@@ -14,7 +15,8 @@ findArraySum([1, 2]) === 3
 findArraySum([1, 2, 3]) === 6
 ```
 
-*[Reverse a word]*
+**[Reverse a word]**
+
 Given a word, return the word with the characters reversed.
 Examples:
 ```
@@ -25,7 +27,8 @@ findReverse('world') === 'dlrow'
 
 ### Easy
 
-*[DNA Compliment]*
+**[DNA Compliment]**
+
 In a DNA string, symbols `A` and `T` are complements of each other, as are `C` and `G`.
 ```
 A <-> T
@@ -40,7 +43,8 @@ findDnaCompliment('ATCG') === 'TAGC'
 findDnaCompliment('GATTACA') === 'CTAATGT'
 ```
 
-*[Time Convert]*
+**[Time Convert]**
+
 Given a number of minutes, return the time in `hr:min` format.
 * No padding is required.
 * The minutes given will range from 0 to 1439
@@ -59,7 +63,8 @@ convertMinutes(1300) === '21:40'
 
 ### Easy/Medium
 
-*[Factorial]*
+**[Factorial]**
+
 Given a number, return the factorial.
 * Solve it both iteratively and recursively.
 
@@ -73,7 +78,8 @@ findFactorial(4) === 4 * 3 * 2 * 1 === 24
 findFactorial(5) === 5 * 4 * 3 * 2 * 1 === 120
 ```
 
-*[Merge Sorted Arrays]*
+**[Merge Sorted Arrays]**
+
 Given two sorted arrays, combine both and return a new array that is sorted.
 
 Examples:
@@ -86,7 +92,8 @@ mergeArrays([1, 1, 2], [2, 3, 3]) === [1, 1, 2, 2, 3, 3]
 
 ### Medium
 
-*[Digital Root]*
+**[Digital Root]**
+
 Write a function, `digitalRoot(num)`. It should sum the digits of a positive integer. If it is greater than 10, sum the digits of the resulting number. Keep repeating until there is only one digit in the result, called the `digital root`. _Do not use string conversion within your method._
 
 Examples:
@@ -96,7 +103,7 @@ digitalRoot(22) # => 4
 digitalRoot(58) # => 4
 ```
 
-*[Symmetric Substrings]*
+**[Symmetric Substrings]**
 Write a function `findSymmetricSubstrings(string)` that returns an array of substrings that are palindromes. Only include substrings of length > 1.
 
 Examples:
