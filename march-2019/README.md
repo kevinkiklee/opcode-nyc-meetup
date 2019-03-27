@@ -23,7 +23,7 @@ Input: [31, 24, 35, 43, 28]
 Output: [24, 43]
 ```
 
-**[Possible Solutions]**
+**Possible Solutions**
 
 ```
 // Time Complexity: O(n) - Linear
@@ -72,7 +72,7 @@ Output: false
 * S becomes "c" while T becomes "b".
 ```
 
-**[Possible Solution]**
+**Possible Solution**
 
 ```
 const evaluateSequence = sequence => {
@@ -94,6 +94,38 @@ const evaluateSequence = sequence => {
 const compareSequences = (S, T) =>
   evaluateSequence(S) === evaluateSequence(T)
 ```
+
+### **[Count Twos]**
+
+Given an array of integers (both negatives and positives), find the count of each instance of the digit `2` in the array.
+
+```
+Input: [-23, -12, 3, 7, 14, 22, 124]
+Output: 5
+Explanation:  -23, -12, 22 and 124 contain the digit 2
+```
+
+**Possible Solution**
+
+```
+const countTwos = number => {
+  let twoCount = 0
+
+  while (number > 0 || number < 0) {
+    const lastDigit = number % 10
+
+    if (lastDigit === 2 || lastDigit === -2) {
+      twoCount += 1
+    }
+
+    number /= 10
+  }
+
+  return twoCount
+}
+```
+
+## Advanced
 
 ### **[Count and Say]**
 
@@ -122,32 +154,37 @@ Input: 4
 Output: "1211"
 ```
 
-### **[Count Twos]**
-
-Given an array of integers (both negatives and positives), find the count of each instance of the digit `2` in the array.
-
+**Possible Solution**
 ```
-Input: [-23, -12, 3, 7, 14, 22, 124]
-Output: 5
-Explanation:  -23, -12, 22 and 124 contain the digit 2
-```
-
-**[Possible Solution]**
-
-```
-const countTwos = number => {
-  let twoCount = 0
-
-  while (number > 0 || number < 0) {
-    const lastDigit = number % 10
-
-    if (lastDigit === 2 || lastDigit === -2) {
-      twoCount += 1
-    }
-
-    number /= 10
+const countAndSay = n => {
+  if (n === 1) {
+    return '1'
   }
 
-  return twoCount
+  const prevSequence = countAndSay(n - 1)
+  const numberChunks = []
+
+  let i = 0
+
+  while (i <= prevSequence.length - 1) {
+    let currentMatch = prevSequence[i]
+    let j = i + 1
+
+    while (j <= prevSequence.length - 1) {
+      if (prevSequence[i] === prevSequence[j]) {
+        currentMatch += prevSequence[i]
+        j += 1
+      } else {
+        break
+      }
+    }
+
+    numberChunks.push(currentMatch)
+    currentMatch = ''
+    i = j
+  }
+
+  return numberChunks.map(chunk => `${chunk.length}${chunk[0]}`).join('')
 }
 ```
+
