@@ -1,5 +1,12 @@
 # Operation Code NYC - March 2019 Meetup
 
+## Schedule
+
+* 6:30pm - Socialization and Refreshments
+* 6:45pm - Kick-off and Introduction
+* 7:00pm - Algorithms!
+* 8:15pm - Networking and Closing
+
 ## No Coding Experience
 
 * Write a function `helloWorld` that prints `Hello, World` to the screen.
@@ -26,9 +33,6 @@ Output: [24, 43]
 **Possible Solutions**
 
 ```
-// Time Complexity: O(n) - Linear
-// Space Complexity: O(1) - Constant
-
 const findMinMax = inputNumbers => {
   let currentMin = Infinity
   let currentMax = -Infinity
@@ -44,8 +48,118 @@ const findMinMax = inputNumbers => {
   return [currentMin, currentMax]
 }
 
-// One-liner for fun
-const findMinMax = nums => nums.reduce(([min, max], num) => [Math.min(min, num), Math.max(max, num)], [Infinity, -Infinity])
+// For fun
+const findMinMax = nums =>
+  nums.reduce(([min, max], num) =>
+    [Math.min(min, num), Math.max(max, num)],
+    [Infinity, -Infinity])
+```
+
+### **[Titlecase a Sentence]**
+
+Write a function that returns the provided string with the first letter of each word capitalized.
+
+Return the provided string with the first letter of each word capitalized. Make sure the rest of the word is in lower case.
+For the purpose of this exercise, also capitalize connecting words like "the" and "of".
+
+```
+titleCase("operation code") should return "Operation Code"
+titleCase("fLATiroN HeALTh") should return "Flatiron Health"
+```
+
+**Possible Solutions**
+
+```
+const titleCase = sentence => {
+  let titleCasedSentence = ''
+
+  const words = sentence.split(' ')
+
+  for (let wordIndex = 0; i < words.length; i++) {
+    const word = words[wordIndex]
+    const chars = word.split('')
+
+    for (let charIndex = 0; j < chars.length; j++) {
+      const char = chars[charIndex]
+
+      if (charIndex === 0) {
+        titleCasedSentence += char.toUpperCase()
+      } else {
+        titleCasedSentence += char.toLowerCase()
+      }
+    }
+
+    titleCaseSentence += ' '
+  }
+
+  return titleCasedSentence
+}
+
+const titleCase = sentence => {
+  let titleCasedSentence = ''
+  let shouldUpperCase = true
+
+  for (let i = 0; i < sentence.length; i++) {
+    const char = sentence[i]
+
+    if (shouldUpperCase) {
+      titleCasedSentence += char.toUpperCase()
+    } else {
+      titleCasedSentence += char.toLowerCase()
+    }
+
+    shouldUpperCase = char === ' '
+  }
+
+  return titleCasedSentence
+}
+
+const titleCase = sentence =>
+  sentence.split(' ').map(word =>
+    word.split('').map((char, i) =>
+      i === 0 ? char.toUpperCase() : char.toLowerCase()
+    ).join('')
+  ).join(' ')
+```
+
+### **[Factorial]**
+
+Write a function that returns the factorial of a given number `n`.
+A factorial is the product of all positive integers from 1 to `n` and is notated with `n!`
+Example: `5! = 1 * 2 * 3 * 4 * 5 = 120`
+
+Only integers greater than or equal to zero will be supplied to the function.
+
+```
+factorialize(5) should return a number.
+factorialize(5) should return 120.
+factorialize(10) should return 3628800.
+factorialize(20) should return 2432902008176640000.
+factorialize(0) should return 1.
+```
+
+**Possible Solutions**
+```
+const findFactorial = n => {
+  let product = 1
+
+  for (let num = 2; num <= n; num++) {
+    product *= num
+  }
+
+  return product
+}
+
+const findFactorial = n => {
+  if (n === 1) {
+    return 1
+  }
+
+  return n * findFactorial(n - 1)
+}
+
+const findFactorial = n =>
+  n === 1 ? 1 : n * findFactorial(n - 1)
 ```
 
 ## Intermediate
@@ -125,66 +239,68 @@ const countTwos = number => {
 }
 ```
 
-## Advanced
+### **[Image Flip]**
 
-### **[Count and Say]**
+Given a binary matrix, we want to flip the image horizontally, then invert it, and return the resulting image.
 
-The count-and-say sequence is the sequence of integers that "counts and says" the previous sequence.
+To flip an image horizontally means that each row of the image is reversed.
+For example, flipping `[1, 1, 0]` horizontally results in `[0, 1, 1]`.
 
-* The sequence starts at `1`
-* `1` is read as "one 1" or, literally `11`.
-* `11` is read as "two 1s" or `21`.
-* `21` is read off as "one 2, then one 1" or `1211`.
-
-```
-1. 1
-2. 11
-3. 21
-4. 1211
-5. 111221
-```
-
-Given an integer `n where `1 ≤ n ≤ 30`, generate the `n`th term of the count-and-say sequence.
+To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0.
+For example, inverting `[0, 1, 1]` results in `[1, 0, 0]`.
 
 ```
-Input: 1
-Output: "1"
+Input: [
+  [1,1,0],
+  [1,0,1],
+  [0,0,0]
+]
+Output: [
+  [1,0,0],
+  [0,1,0],
+  [1,1,1]
+]
 
-Input: 4
-Output: "1211"
+Input: [
+  [1,1,0,0],
+  [1,0,0,1],
+  [0,1,1,1],
+  [1,0,1,0]
+]
+Output: [
+  [1,1,0,0],
+  [0,1,1,0],
+  [0,0,0,1],
+  [1,0,1,0]
+]
 ```
 
 **Possible Solution**
+
 ```
-const countAndSay = n => {
-  if (n === 1) {
-    return '1'
-  }
+// Time Complexity: O(row*col)
+// Space Complexity: O(1)
 
-  const prevSequence = countAndSay(n - 1)
-  const numberChunks = []
+const flipAndInvertImage = grid => {
+  const rowLength = grid.length
+  const colLength = grid[0].length
 
-  let i = 0
+  for (let row = 0; row < rowLength; row += 1) {
+    for (let col = 0; col < colLength / 2; col += 1) {
+      const oppCol = colLength - 1 - col
+      const swap = grid[row][col] ? 0 : 1
 
-  while (i <= prevSequence.length - 1) {
-    let currentMatch = prevSequence[i]
-    let j = i + 1
-
-    while (j <= prevSequence.length - 1) {
-      if (prevSequence[i] === prevSequence[j]) {
-        currentMatch += prevSequence[i]
-        j += 1
-      } else {
-        break
-      }
+      grid[row][col] = grid[row][oppCol] ? 0 : 1
+      grid[row][oppCol] = swap
     }
-
-    numberChunks.push(currentMatch)
-    currentMatch = ''
-    i = j
   }
 
-  return numberChunks.map(chunk => `${chunk.length}${chunk[0]}`).join('')
-}
-```
+  return grid
+};
 
+// Time Complexity: O(row*col)
+// Space Complexity: O(row*col)
+
+const flipAndInvertImage = grid =>
+  grid.map(row => row.reverse().map(cell => cell ? 0 : 1))
+```
