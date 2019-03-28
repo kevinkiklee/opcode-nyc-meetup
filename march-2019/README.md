@@ -239,7 +239,7 @@ const countTwos = number => {
 }
 ```
 
-*[Cellular Automata]*
+### **[Cellular Automata]**
 
 Eight houses, represented as cells, are arranged in a straight line.
 Each day, every cell competes with its adjacent cells (neighbors).
