@@ -239,6 +239,46 @@ const countTwos = number => {
 }
 ```
 
+*[Cellular Automata]*
+
+Eight houses, represented as cells, are arranged in a straight line.
+Each day, every cell competes with its adjacent cells (neighbors).
+An integer value of 1 represents an active cell and a value of 0 represents an inactive cell.
+
+Rules:
+* If the neighbors on both sides of the cell are _same_, the cell becomes _inactive_.
+* Otherwise, the cell becomes _active_.
+
+The two cells on each end have a single adjacent cell, so assume that the unoccupied space on the opposite side is an inactive cell.
+The state information of all cells should be updated simultaneously.
+
+Write an algorithm to output the state of the cells after the given number of days.
+
+Examples:
+```
+runCellularAutomata([1, 0, 0, 0, 0, 1, 0, 0], 1) === [0, 1, 0, 0, 1, 0, 1, 0]
+runCellularAutomata([1, 1, 1, 0, 1, 1, 1, 1], 2) === [0, 0, 0 ,0, 0, 1, 1, 0]
+```
+
+**Possible Solution**
+
+```
+const runCellularAutomate = (state, days) => {
+  if (days === 0) {
+    return state
+  }
+
+  const prevState = runCellularAutomate(state, days - 1)
+
+  return prevState.map((cell, i) => {
+    const prevCell = i === 0 ? 0 : state[i - 1]
+    const nextCell = i === state.length - 1 ? 0 : state[i + 1]
+
+    return prevCell === nextCell ? 0 : 1
+  })
+}
+```
+
 ### **[Image Flip]**
 
 Given a binary matrix, we want to flip the image horizontally, then invert it, and return the resulting image.
